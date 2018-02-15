@@ -1,0 +1,4 @@
+{
+    "Router:prepareRouterInfo": ["dxkite.page.Page->init"],
+    "template:SudaCompiler:init": ["dxkite.page.Page::template"]
+}
