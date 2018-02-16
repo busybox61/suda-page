@@ -20,6 +20,13 @@ use dxkite\support\visitor\Context;
 
 class AddResponse extends \dxkite\support\setting\Response
 {
+    /**
+     * 添加页面
+     * @acl page.add
+     * @param [type] $view
+     * @param [type] $context
+     * @return void
+     */
     public function onAdminView($view, $context)
     {
         $new=Page::getNew();
@@ -40,10 +47,10 @@ class AddResponse extends \dxkite\support\setting\Response
         }
         foreach ($templates as $module=>$items) {
             $list[]= '<optgroup label="'. $module .'">';
-            foreach ($items as $name=>$path) {
+            foreach ($items as $name) {
                 $fullname=$module.':'.$name;
                 $show= $fullname==$select?' selected="selected" ':'';
-                $list[]='<option value="'.$fullname.'" '.$show.' title="'.$path.'">'.$fullname. '</option>';
+                $list[]='<option value="'.$fullname.'" '.$show.'>'.$fullname. '</option>';
             }
             $list[] = '</optgroup>';
         }

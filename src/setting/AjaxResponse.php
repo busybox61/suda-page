@@ -33,7 +33,7 @@ class AjaxResponse extends \dxkite\support\visitor\response\CallableResponse
     }
 
     /**
-     * @cal edit_page
+     * @cal page.edit
      */
     public function setPageValue(int $id, string $name, string $value)
     {
@@ -41,7 +41,7 @@ class AjaxResponse extends \dxkite\support\visitor\response\CallableResponse
     }
 
     /**
-     * @cal edit_page
+     * @cal page.edit
      */
     public function getPageValue(int $id, string $value)
     {
@@ -49,7 +49,7 @@ class AjaxResponse extends \dxkite\support\visitor\response\CallableResponse
     }
 
     /**
-     * @cal edit_page
+     * @cal page.edit
      *
      * @param int $id
      * @return void
@@ -61,7 +61,7 @@ class AjaxResponse extends \dxkite\support\visitor\response\CallableResponse
 
 
     /**
-     * @acl gen_html
+     * @acl page.genHtml
      */
     public function saveHtml(int $id)
     {
@@ -69,7 +69,7 @@ class AjaxResponse extends \dxkite\support\visitor\response\CallableResponse
     }
     
     /**
-     * @cal edit_page
+     * @cal page.edit
      *
      * @param int $id
      * @param array $value

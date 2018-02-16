@@ -23,7 +23,7 @@ class EditResponse extends \dxkite\support\setting\Response
 {
     /**
      * 
-     * @acl edit_page
+     * @acl page.edit
      * @param Context $context
      * @return void
      */
@@ -64,10 +64,10 @@ class EditResponse extends \dxkite\support\setting\Response
         }
         foreach ($templates as $module=>$items) {
             $list[]= '<optgroup label="'. $module .'">';
-            foreach ($items as $name=>$path) {
+            foreach ($items as $name) {
                 $fullname=$module.':'.$name;
                 $show= $fullname==$select?' selected="selected" ':'';
-                $list[]='<option value="'.$fullname.'" '.$show.' title="'.$path.'">'.$fullname. '</option>';
+                $list[]='<option value="'.$fullname.'" '.$show.'>'.$fullname. '</option>';
             }
             $list[] = '</optgroup>';
         }

@@ -110,12 +110,12 @@ class PageTable extends Table
         return $this->updateByPrimaryKey($id, ['status'=>$statu]);
     }
 
-    public function list(int $page=null, int $rows=10)
+    public function list(int $page=null, int $rows=10,bool $offset=false)
     {
         if (is_null($page)) {
             $list=parent::listWhere(['status'=>0]);
         } else {
-            $list=parent::listWhere(['status'=>0], [], $page, $rows);
+            $list=parent::listWhere(['status'=>0], [], $page, $rows,$offset);
         }
         return $list;
     }

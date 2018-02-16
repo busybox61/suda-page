@@ -84,16 +84,6 @@ class Page
     public function addRouter(string $name, string $match)
     {
         self::$router->addRouter('static_'.$name, '/'.$match, 'dxkite\\page\\response\\PageResponse', 'dxkite/page');
-        $template=ThemeManager::instance()->getCurrentTheme();
-        if (isset($template->config['page']) && is_array($template->config['page'])) {
-            foreach ($template->config['page'] as $routeName=> $page) {
-                $page['class']=$page['class']??'dxkite\\page\\response\\PageResponse';
-                $mapping=Mapping::createFromRouteArray(Mapping::ROLE_SIMPLE, 'dxkite/page', $routeName, $page);
-                $mapping->setParam(['templatePage'=>true,'template'=>$page['template'],'data'=>$page['data']??[]]);
-                $mapping->build();
-                self::$router->addMapping($mapping);
-            }
-        }
     }
 
     public function init($router)
@@ -103,6 +93,16 @@ class Page
         if (is_array($pages)) {
             foreach ($pages as $page) {
                 self::addRouter($page['name'], $page['match']);
+            }
+        }
+        $template=ThemeManager::instance()->getCurrentTheme();
+        if (isset($template->config['page']) && is_array($template->config['page'])) {
+            foreach ($template->config['page'] as $routeName=> $page) {
+                $page['class']=$page['class']??'dxkite\\page\\response\\PageResponse';
+                $mapping=Mapping::createFromRouteArray(Mapping::ROLE_SIMPLE, 'dxkite/page', $routeName, $page);
+                $mapping->setParam(['templatePage'=>true,'template'=>$page['template'],'data'=>$page['data']??[]]);
+                $mapping->build();
+                self::$router->addMapping($mapping);
             }
         }
     }

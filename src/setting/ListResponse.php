@@ -25,7 +25,7 @@ class ListResponse extends \dxkite\support\setting\Response
 {
     /**
      *
-     * @acl list_page,delete_page
+     * @acl page.[list,delete]
      * @param Context $context
      * @return void
      */
@@ -43,7 +43,9 @@ class ListResponse extends \dxkite\support\setting\Response
         $view->set('page.max', ceil($dao->count()/10));
         $view->set('page.now', $now);
         $view->set('page.router', 'pages:admin_list');
-        $view->set('list', $list);
+        if ($list) {
+            $view->set('list', $list);
+        }
     }
 
 

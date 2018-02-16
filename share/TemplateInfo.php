@@ -64,36 +64,6 @@ class TemplateInfo extends \suda\template\compiler\suda\Compiler
 
     public static function getTemplates()
     {
-        $modules=$modules??app()->getLiveModules();
-        foreach ($modules as $module) {
-            if (!app()->checkModuleExist($module)) {
-                continue;
-            }
-            if ($sources=Manager::getTemplateSource($module)) {
-                foreach ($sources as $source) {
-                    self::getModuleTemplate($module, $source, $source);
-                }
-            }
-        }
-        return self::$templates;
-    }
-
-    protected static function getModuleTemplate(string $module, string $root, string $dirs)
-    {
-        $hd=opendir($dirs);
-        while ($read=readdir($hd)) {
-            if (strcmp($read, '.') !== 0 && strcmp($read, '..') !==0) {
-                $path=$dirs.'/'.$read;
-                if (preg_match('/'.preg_quote($root.'/static', '/').'/', $path)) {
-                    continue;
-                }
-                if (is_file($path) && preg_match('/\.tpl\..+$/', $path)) {
-                    $name=preg_replace('/^'.preg_quote($root, '/').'\/(.+)\.tpl\..+$/', '$1', $path);
-                    self::$templates[$module][$name]=$path;
-                } elseif (is_dir($path)) {
-                    self::getModuleTemplate($module, $root, $path);
-                }
-            }
-        }
+        return \dxkite\support\template\Manager::getTemplates();
     }
 }
