@@ -1,0 +1,6 @@
+{
+    "prefix":"page_",
+    "tables": {
+        "page": "dxkite.page.table.PageTable"
+    }
+}
