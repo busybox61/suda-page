@@ -9,7 +9,7 @@
                 "name": "页面列表"
             },
             "page:admin_edit": {
-                "name": "页面列表"
+                "name": "页面编辑"
             }
         }
     }
