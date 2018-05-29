@@ -8,133 +8,175 @@
 @else
 
 <div class="form-group row">
-        <label for="page-id" class="col-2 col-form-label">@_('页面名称')</label>
-        <div class="col-10">
-            <input name="name" class="form-control" type="text" id="page-id" required value="{{$:page.name}}" data-set="name" data-id="{{$:page.id}}">
+    <label for="page-id" class="col-2 col-form-label">@_('页面名称')</label>
+    <div class="col-10">
+        <input name="name" class="form-control" type="text" id="page-id" required value="{{$:page.name}}" data-set="name" data-id="{{$:page.id}}">
+    </div>
+</div>
+<div class="form-group row">
+    <label for="page-url" class="col-2 col-form-label">{=页面URL}</label>
+    <div class="col-10">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">@pageBase</span>
+            </div>
+            <input name="url" type="text" id="page-url" class="form-control" value="{{$:page.match}}" data-set="match" data-id="{{$:page.id}}">
         </div>
     </div>
-    <div class="form-group row">
-        <label for="page-url" class="col-2 col-form-label">{=页面URL}</label>
-        <div class="col-10">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">@pageBase</span>
-                </div>
-                <input name="url" type="text" id="page-url" class="form-control" value="{{$:page.match}}" data-set="match" data-id="{{$:page.id}}">
+</div>
+<div class="form-group row">
+    <label for="page" class="col-2 col-form-label">{=页面模板}</label>
+    <div class="col-10 ">
+        <select class="form-control" id="template" name="template" aria-describedby="template-description" data-set="template" data-id="{{$:page.id}}"
+            data-refersh="value">
+            {{! $this->response->getTemplateOptions($:page.id(0)) }}
+        </select>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="page" class="col-2 col-form-label">{=页面值}</label>
+    <div class="col-10 ">
+        <select class="form-control" id="value_name" name="value" aria-describedby="value-description" data-id="{{$:page.id}}" data-input="value">
+            <option value="">@_('请选择')</option>
+        </select>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="values" class="col-2 col-form-label">{=页面压值}</label>
+    <div class="col-10">
+        <textarea class="form-control" id="value" name="values" rows="3" data-id="{{$:page.id}}"></textarea>
+    </div>
+</div>
+<button type="submit" class="btn btn-primary" id="save" data-id="{{$:page.id}}">{=保存页面}</button>
+<button type="submit" class="btn btn-primary" id="saveHtml" data-id="{{$:page.id}}">{=生成静态页面}</button>
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@_('保存页面')</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {= 保存成功 }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">@_('确认')</button>
             </div>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="page" class="col-2 col-form-label">{=页面模板}</label>
-        <div class="col-10 ">
-            <select class="form-control" id="template" name="template" aria-describedby="template-description" data-set="template" data-id="{{$:page.id}}"
-                data-refersh="value">
-                {{! $this->response->getTemplateOptions($:page.id(0)) }}
-            </select>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="page" class="col-2 col-form-label">{=页面值}</label>
-        <div class="col-10 ">
-            <select class="form-control" id="value_name" name="value" aria-describedby="value-description" data-id="{{$:page.id}}" data-input="value">
-                <option value="">@_('请选择')</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="values" class="col-2 col-form-label">{=页面压值}</label>
-        <div class="col-10">
-            <textarea class="form-control" id="value" name="values" rows="3" data-id="{{$:page.id}}"></textarea>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary" id="save" data-id="{{$:page.id}}">{=保存页面}</button>
-    <button type="submit" class="btn btn-primary" id="saveHtml" data-id="{{$:page.id}}">{=生成静态页面}</button>
-    <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@_('保存页面')</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {= 保存成功 }
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">@_('确认')</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    @startInsert('bs-footer')
-    <script src="@static(support)/call.js" data-api="@u('page:admin_ajax')"></script>
-    <script>
-        $(function () {
-    
-            $("#save").on('click', function () {
-                dx.xcall('save', {
-                    args: [this.dataset.id],
-                    success: (result) => {
-                        $('#info').modal('show');
-                    },
-                    error: (error) => {
-                        var modal = $('#info');
-                        modal.find('.modal-body').text(error.message + ":" + error.data);
-                        modal.modal('show');
-                    }
-                });
+</div>
+@startInsert('bs-footer')
+<script src="@static(support)/call.js" data-api="@u('page:admin_ajax')"></script>
+<script>
+    $(function () {
+
+        $("#save").on('click', function () {
+            dx.xcall('save', {
+                args: [this.dataset.id],
+                success: (result) => {
+                    $('#info').modal('show');
+                },
+                error: (error) => {
+                    var modal = $('#info');
+                    modal.find('.modal-body').text(error.message + ":" + error.data);
+                    modal.modal('show');
+                }
             });
-    
-            $("#saveHtml").on('click', function () {
-                dx.xcall('saveHtml', {
-                    args: [this.dataset.id],
-                    success: (result) => {
-                        $('#info').modal('show');
-                    },
-                    error: (error) => {
-                        var modal = $('#info');
-                        modal.find('.modal-body').text(error.message + ":" + error.data);
-                        modal.modal('show');
-                    }
-                });
+        });
+
+        $("#saveHtml").on('click', function () {
+            dx.xcall('saveHtml', {
+                args: [this.dataset.id],
+                success: (result) => {
+                    $('#info').modal('show');
+                },
+                error: (error) => {
+                    var modal = $('#info');
+                    modal.find('.modal-body').text(error.message + ":" + error.data);
+                    modal.modal('show');
+                }
             });
-    
-            function AfterChange(elem, callback) {
-                var changed = false;
-                $(elem).on('change', function () {
-                    changed = true;
-                });
-                $(elem).on('blur', function () {
-                    callback.call(this);
-                    changed = false;
-                });
-            }
-    
-            $('[data-input]').on('change', function () {
-                var elem = this;
-                dx.xcall('getPageValue', {
-                    args: [this.dataset.id, $(this).val()],
-                    success: (result) => {
-                        $('#value').text(result);
-                        $('#value').attr("name", $(elem).val());
-                    },
-                    error: (error) => {
-                        var modal = $('#info');
-                        modal.find('.modal-body').text(error.message + ":" + error.data);
-                        modal.modal('show');
-                    }
-                });
+        });
+
+        function AfterChange(elem, callback) {
+            var changed = false;
+            $(elem).on('change', function () {
+                changed = true;
             });
-    
-            new AfterChange($('#value'), function () {
-                var elem = this;
-                dx.xcall('setPageValue', {
-                    args: [this.dataset.id,$(this).attr("name"), $(this).val()],
+            $(elem).on('blur', function () {
+                callback.call(this);
+                changed = false;
+            });
+        }
+
+        $('[data-input]').on('change', function () {
+            var elem = this;
+            dx.xcall('getPageValue', {
+                args: [this.dataset.id, $(this).val()],
+                success: (result) => {
+                    $('#value').text(result);
+                    $('#value').attr("name", $(elem).val());
+                },
+                error: (error) => {
+                    var modal = $('#info');
+                    modal.find('.modal-body').text(error.message + ":" + error.data);
+                    modal.modal('show');
+                }
+            });
+        });
+
+        new AfterChange($('#value'), function () {
+            var elem = this;
+            dx.xcall('setPageValue', {
+                args: [this.dataset.id, $(this).attr("name"), $(this).val()],
+                success: (result) => {
+                    $('#value').text(result);
+                    $('#value').attr("name", $(elem).val());
+                },
+                error: (error) => {
+                    var modal = $('#info');
+                    modal.find('.modal-body').text(error.message + ":" + error.data);
+                    modal.modal('show');
+                }
+            });
+            console.log($(this).val());
+        });
+
+        $('[data-set]').each(function (index, elem) {
+            new AfterChange(elem, function () {
+                if (typeof this.dataset.refersh != 'undefined') {
+                    dx.xcall('getTemplateValues', {
+                        args: [$(elem).val()],
+                        success: (result) => {
+                            if (result instanceof Array) {
+                                var html = '';
+                                result.forEach(function (element) {
+                                    html += '<option value="' + element +
+                                        '">' +
+                                        element + '</option>';
+                                }, this);
+                                // console.log(html);
+                                $('#value_name').html(html);
+                            } else {
+                                console.log('empty result array');
+                            }
+                        },
+                        error: (error) => {
+                            var modal = $('#info');
+                            modal.find('.modal-body').text(error.message + ":" +
+                                error.data);
+                            modal.modal('show');
+                        }
+                    });
+                }
+                var data = {};
+                data[this.dataset.set] = $(this).val();
+                dx.xcall('update', {
+                    args: [elem.dataset.id, data],
                     success: (result) => {
-                        $('#value').text(result);
-                        $('#value').attr("name", $(elem).val());
+                        console.log(result);
                     },
                     error: (error) => {
                         var modal = $('#info');
@@ -144,50 +186,8 @@
                 });
                 console.log($(this).val());
             });
-    
-            $('[data-set]').each(function (index, elem) {
-                new AfterChange(elem, function () {
-                    if (typeof this.dataset.refersh != 'undefined') {
-                        dx.xcall('getTemplateValues', {
-                            args: [$(elem).val()],
-                            success: (result) => {
-                                if (result instanceof Array) {
-                                    var html = '';
-                                    result.forEach(function (element) {
-                                        html += '<option value="' + element +
-                                            '">' +
-                                            element + '</option>';
-                                    }, this);
-                                    // console.log(html);
-                                    $('#value_name').html(html);
-                                } else {
-                                    console.log('empty result array');
-                                }
-                            },
-                            error: (error) => {
-                                var modal = $('#info');
-                                modal.find('.modal-body').text(error.message + ":" +
-                                    error.data);
-                                modal.modal('show');
-                            }
-                        });
-                    }
-                    var data = {};
-                    data[this.dataset.set] = $(this).val();
-                    dx.xcall('update', {
-                        args: [elem.dataset.id, data],
-                        success: (result) => {
-                            console.log(result);
-                        },
-                        error: (error) => {
-                            var modal = $('#info');
-                            modal.find('.modal-body').text(error.message + ":" + error.data);
-                            modal.modal('show');
-                        }
-                    });
-                    console.log($(this).val());
-                });
-            });
-        })
-    </script>
-    @endinsert
+        });
+    })
+</script>
+@endinsert
+@endif 
